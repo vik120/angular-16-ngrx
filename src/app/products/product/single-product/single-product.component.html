@@ -1,0 +1,44 @@
+<ng-container *ngIf="data$ | async as data">
+    <div class="spinner-border text-danger text-center m-5 spinner-border-sm" style="width: 5rem; height: 5rem;" role="status" *ngIf="data.isLoading$">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div *ngIf="data?.isSingleProduct">
+        <div class="single-product-header text-center py-5 bg-primary  bg-opacity-10">
+            <div class="container">
+                <h1>{{ data.isSingleProduct.category.name }}</h1>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <ngb-carousel [interval]="1000">
+                        <ng-template ngbSlide *ngFor="let item of data.isSingleProduct.images">
+                            <div class="picsum-img-wrapper text-center">
+                                <img [src]="item" alt="Random first slide" />
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+                <div class="col-md-6">
+                    <article>
+                        <h4>{{data?.isSingleProduct.title}}</h4>
+                    </article>
+                    <article>
+                        <p>
+                            <span class="me-3"><del>{{(data?.isSingleProduct.price + (data?.isSingleProduct.price * 0.6)) | currency}}</del></span>
+                            <span class="me-3">{{data?.isSingleProduct.price | currency}}</span>
+                            <span class="badge bg-primary">Discount: 60%</span>
+                        </p>
+                    </article>
+                    <article>
+                        <h5>Description</h5>
+                        <p>{{data?.isSingleProduct.description}}</p>
+                    </article>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ng-container>
+

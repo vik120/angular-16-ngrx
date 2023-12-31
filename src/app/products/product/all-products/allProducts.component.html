@@ -1,0 +1,35 @@
+<ng-container *ngIf="data$ | async as data">
+  <div class="spinner-border text-danger text-center m-5 spinner-border-sm" style="width: 5rem; height: 5rem;" role="status" *ngIf="data.loading$">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <section class="container mt-4" *ngIf="data.products$">
+    <div class="row mb-3">
+      <div class="col-md-8">
+        <h2>Products</h2>
+      </div>
+      <div class="col-md-4 text-end">
+        <button (click)="open()" class="btn btn-outline-primary">Add a Product</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 mb-3" *ngFor="let item of data.products$">
+        <div class="card">
+          <img [src]="item.images[0]" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title h6 mb-0"><a [routerLink]="['/products/item', item.id]">
+                {{item.title}}
+              </a></h5>
+            <p class="card-text mb-0"><small>Price:- {{item.price | currency}}</small></p>
+            <p class="mb-0">
+              <a [routerLink]="['/category/', item.category.id]"
+                class="badge text-bg-secondary">{{item.category.name}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="" *ngIf="data.error$">
+      {{data.error$.message }}
+    </div>
+  </section>
+</ng-container>

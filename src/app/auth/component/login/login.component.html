@@ -1,22 +1,30 @@
- 
-<main class="form-signin">
+<ng-container *ngIf="data$ | async as data">
+
+  <main class="form-signin">
     <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
       <figure class="text-center">
-        <img  src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
       </figure>
       <h2 class="h3 fw-normal text-center">Please Sign In</h2>
-      <p class="h6  mb-4"><em>Don't have account? </em>  <a [routerLink]="['/register']" routerLinkActive="router-link-active">Register here</a> </p>
-       
+      <p class="h6  mb-4"><em>Don't have account? </em> <a [routerLink]="['/register']"
+          routerLinkActive="router-link-active">Register here</a> </p>
+
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  formControlName="email" [class.is-invalid]="LoginForm.get('email')?.invalid && LoginForm.get('email')?.touched">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+          formControlName="email"
+          [class.is-invalid]="LoginForm.get('email')?.invalid && LoginForm.get('email')?.touched">
         <label for="floatingInput">Email address</label>
       </div>
       <div class="form-floating mb-3 ">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password" [class.is-invalid]="LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+          formControlName="password"
+          [class.is-invalid]="LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched">
         <label for="floatingPassword">Password</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="LoginForm.invalid || ( isSubmitting$ | async)">Sign up {{ ( isSubmitting$ | async) }}</button>
-      
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2017–2024</p>
     </form>
   </main>
+
+</ng-container>

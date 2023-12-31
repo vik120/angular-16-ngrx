@@ -1,0 +1,38 @@
+<ng-container *ngIf="data$ | async as user">
+  <nav class="navbar navbar-expand-md navbar-light  bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">Ngrx navbar</span>
+      <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed"
+        aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['category']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:
+              true}" >Category</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['users']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:
+              true}">Users</a>
+          </li>
+
+          <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end" *ngIf="user.currentUser$">
+            <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> {{ user.currentUser$?.name }} </a>
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+              <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Profile</a>
+              <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Add a Product</a>
+              <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Add a Category</a>
+              <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout()">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</ng-container>

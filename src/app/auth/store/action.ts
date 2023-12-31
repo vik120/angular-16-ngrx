@@ -2,6 +2,9 @@ import { createAction, createActionGroup, emptyProps, props } from "@ngrx/store"
 import { registerRequestInterface } from "../type/registerRequest.interface";
 import { loginRequestInterface } from '../type/loginRequest.interface';
 import { tokenInterface } from '../type/token.interface';
+import { backeneErrorInterface } from "src/app/shared/types/backendError.interface";
+import { HttpErrorResponse } from "@angular/common/http";
+import { CurrentUserInterface } from "../type/currentUser.interface";
 
 // export const registerAction = createAction('[Auth] Register', props<{request: registerRequestInterface}>())
 
@@ -14,10 +17,14 @@ export const authActions = createActionGroup({
     source: 'auth',
     events: {
         RegisterAction: props<{request: registerRequestInterface}>(),
-        RegisterSuccess: props<tokenInterface>(),
+        RegisterSuccess: emptyProps(),
         RegisterFailure: emptyProps(),
         LoginAction: props<{request: loginRequestInterface}>(),
-        LoginSuccess: props<tokenInterface>(),
-        LoginFailure: emptyProps()
+        LoginSuccess: props<{tokens: tokenInterface}>(),
+        LoginFailure: props<{errors: HttpErrorResponse}>(),
+        GetCurrentUserAction: emptyProps(),
+        GetCurrentUserActionSuccess: props<{currentUser: any}>(),
+        GetCurrentUserActionFailure: emptyProps(),
+        Logout: emptyProps()
     }
 })

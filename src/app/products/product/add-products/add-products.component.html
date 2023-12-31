@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add New</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+<div class="modal-body">
+    
+        <div class="mb-3">
+            <label for="categoryId" class="form-label">Category</label>
+            <select class="form-select" id="categoryId" required formControlName="categoryId">
+                <option selected value="">Choose...</option>
+                <option value="1">Clothes</option>
+                <option value="2">Electronics</option>
+                <option value="3">Furniture</option>
+                <option value="4">Shoes</option>
+                <option value="5">Others</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Name</label>
+            <input type="text" class="form-control" id="title" formControlName="title" required />
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" min="0" class="form-control" id="price" formControlName="price" required />
+        </div>
+        <div class="mb-3" formArrayName="images">
+            <label for="Price" class="form-label">Image</label>
+            <div *ngFor="let item of imageArr.controls; let index = index" [formGroupName]="index"> 
+                <div class="input-group mb-3">
+                    <input type="url" class="form-control" required formControlName="imgbox" />
+                    <span class="input-group-text" id="basic-addon2" (click)="removeBook(index)">X</span>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" (click)="addImage()">Add Image</button>
+            </div>
+        </div>
+    
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-outline-primary">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
+</form>
